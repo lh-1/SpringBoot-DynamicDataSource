@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.hellowood.dynamicdatasource.mapper.SecProductDao">
+
+    <resultMap id="secProductMap" type="cn.com.hellowood.dynamicdatasource.modal.SecProduct">
+        <id column="secId" property="secId" javaType="java.lang.Long" jdbcType="INTEGER"></id>
+        <id column="id" property="id" javaType="java.lang.Long" jdbcType="INTEGER"></id>
+        <result column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+        <result column="price" property="price" javaType="java.lang.Long" jdbcType="BIGINT"></result>
+        <result column="num" property="num" javaType="java.lang.Integer" jdbcType="INTEGER"></result>
+        <result column="startDate" property="startDate" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="endDate" property="endDate" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="finishTime" property="finishTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+
+    <resultMap id="secOrderMap" type="cn.com.hellowood.dynamicdatasource.modal.SecOrder">
+        <id column="orderId" property="orderId" javaType="java.lang.Long" jdbcType="INTEGER"></id>
+        <id column="userCode" property="userCode" javaType="java.lang.String" jdbcType="VARCHAR"></id>
+        <id column="secId" property="secId" javaType="java.lang.Long" jdbcType="INTEGER"></id>
+        <result column="num" property="num" javaType="java.lang.Integer" jdbcType="INTEGER"></result>
+        <result column="createTime" property="createTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="finishTime" property="finishTime" javaType="java.util.Date" jdbcType="TIMESTAMP"></result>
+        <result column="status" property="status" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+
+    <select id="findSecInfo" resultType="cn.com.hellowood.dynamicdatasource.modal.SecProduct">
+        SELECT *
+        FROM secProduct
+        WHERE secId = #{secId}
+        LIMIT 1
+    </select>
+
+    <update id="decreaseSecNum" parameterType="java.lang.Long">
+        UPDATE secProduct set num = num - 1 WHERE secId = #{secId} and num >= 1;
+    </update>
+
+    <insert id="execOrder" parameterType="cn.com.hellowood.dynamicdatasource.modal.SecOrder">
+        INSERT INTO secOrder(userCode, secId, num, createTime, finishTime, status)
+          VALUES(#{userCode}, #{secId}, #{num}, #{createTime}, #{finishTime}, #{status});
+    </insert>
+
+</mapper>
