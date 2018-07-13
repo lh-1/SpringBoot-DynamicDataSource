@@ -34,6 +34,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('com.alibaba:druid-spring-boot-starter:1.1.6')
 
+    /*引入cloud*/
+    compile 'org.springframework.cloud:spring-cloud-starter-eureka:1.4.4.RELEASE'
+
     compile('org.projectlombok:lombok:1.18.0')
     compile('io.springfox:springfox-swagger2:2.2.2')
     compile('io.springfox:springfox-swagger-ui:2.2.2')

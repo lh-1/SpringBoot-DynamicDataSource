@@ -4,7 +4,6 @@ package cn.com.hellowood.dynamicdatasource.configuration;
 import cn.com.hellowood.dynamicdatasource.common.DataSourceKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +67,6 @@ public class DynamicDataSourceContextHolder {
             /*int datasourceKeyIndex = counter % slaveDataSourceKeys.size();
             CONTEXT_HOLDER.set(String.valueOf(slaveDataSourceKeys.get(datasourceKeyIndex)));
             counter++;*/
-            if (StringUtils.isEmpty(tokenId)) {
-                CONTEXT_HOLDER.set(DataSourceKey.master.name());
-                logger.info(CONTEXT_HOLDER.get());
-                return;
-            }
             if (tokenId.contains("123")) {
                 CONTEXT_HOLDER.set(DataSourceKey.slaveAlpha.name());
             } else if (tokenId.contains("456")) {

@@ -18,6 +18,11 @@ public class SecProductService {
     @Autowired
     private SecProductDao secProductDao;
 
+    public SecProduct findSecInfo(Long secId) {
+        SecProduct secProduct = secProductDao.findSecInfo(secId);
+        return secProduct;
+    }
+
     public Object execSec(Long secId, String tokenId) {
         SecProduct secProduct = secProductDao.findSecInfo(secId);
         if (secProduct != null && secProduct.getNum() > 0) {
